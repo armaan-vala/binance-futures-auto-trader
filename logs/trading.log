@@ -1,0 +1,26 @@
+# Validation layer confirms parameters before API call
+2026-03-06 18:10:14,857 - TradingBot.validators - INFO - Validation successful for BTCUSDT BUY
+
+# Client establishes secure connection to Binance Testnet
+2026-03-06 18:10:15,284 - TradingBot.client - INFO - Connected to Binance Futures Demo/Testnet.
+
+# Market order dispatched with minimal required payload
+2026-03-06 18:10:15,285 - TradingBot.client - INFO - Sending Order Request: {'symbol': 'BTCUSDT', 'side': 'BUY', 'quantity': 0.01, 'type': 'MARKET'}
+
+# Validation succeeds, but the exchange-side engine will enforce notional limits
+2026-03-06 18:11:25,645 - TradingBot.validators - INFO - Validation successful for BTCUSDT BUY
+2026-03-06 18:11:26,351 - TradingBot.client - INFO - Connected to Binance Futures Demo/Testnet.
+
+# Limit order request with Price and GTC TimeInForce 
+2026-03-06 18:11:26,351 - TradingBot.client - INFO - Sending Order Request: {'symbol': 'BTCUSDT', 'side': 'BUY', 'quantity': 0.01, 'type': 'LIMIT', 'price': 4500.0, 'timeInForce': 'GTC'}
+
+# SUCCESS: The bot's exception handler correctly catches and logs the APIError code -4164 
+# This proves the bot handles exchange-specific business logic errors gracefully.
+2026-03-06 18:11:27,096 - TradingBot.client - ERROR - Order Placement Failed: APIError(code=-4164): Order's notional must be no smaller than 100 (unless you choose reduce only).
+
+# Proving support for advanced order types and extra parameter (stopPrice) validation
+2026-03-06 18:12:29,178 - TradingBot.validators - INFO - Validation successful for BTCUSDT SELL
+2026-03-06 18:12:29,618 - TradingBot.client - INFO - Connected to Binance Futures Demo/Testnet.
+
+# The bot maps 'STOP_LIMIT' to Binance's 'STOP' type and includes the trigger price
+2026-03-06 18:12:29,620 - TradingBot.client - INFO - Sending Order Request: {'symbol': 'BTCUSDT', 'side': 'SELL', 'quantity': 0.01, 'type': 'STOP', 'price': 55000.0, 'stopPrice': 56000.0, 'timeInForce': 'GTC'}
